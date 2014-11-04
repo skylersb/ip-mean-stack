@@ -1,0 +1,31 @@
+{
+  "name": "ip-mean-stack",
+  "version": "1.0.0",
+  "description": "ip-mean-stack =============",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "fullstack"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skylersb/ip-mean-stack.git"
+  },
+  "author": "Skyler Blood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skylersb/ip-mean-stack/issues"
+  },
+  "homepage": "https://github.com/skylersb/ip-mean-stack",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "cors": "^2.5.0",
+    "express": "^4.10.0",
+    "mongodb": "^1.4.19",
+    "mongoose": "^3.8.18",
+    "socket.io": "^1.2.0"
+  }
+}

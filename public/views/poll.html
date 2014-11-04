@@ -1,0 +1,15 @@
+<!-- POLL QUESTION -->
+
+<div id="pollQuestion" class="pollQuestion">
+	
+	<h1>{{singlePoll.question}}</h1>
+	<div ng-hide="poll.userVoted">
+		<br />
+		<br />
+		<!--  POLL OPTIONS -->
+		<div id="optionBtn" ng-repeat="option in singlePoll.pollOptions">
+			<!-- OPTION CHOSEN -->
+			<button  class="btn btn-primary"  ng-click="vote(option)">{{option.text}}</button>
+		</div>
+	</div>
+</div>
