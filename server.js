@@ -20,7 +20,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(express.session({secret: "whatevertheheckIwantontuesdayinjuly"}));
+// app.use(express.session({secret: "whatevertheheckIwantontuesdayinjuly"}));
 app.use(passport.session());
 //ties in the index.html
 app.use(express.static(__dirname + '/public'));
