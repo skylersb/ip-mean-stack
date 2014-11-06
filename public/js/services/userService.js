@@ -10,7 +10,7 @@ app.service('userService', function($http, $q, $cookieStore, $location){
 	this.setUser = function(){
 		 	return $http ({
 		 		method: 'GET',
-		 		url: 'http://localhost:3000/me'
+		 		url: '/me'
 		 	}).then(function(res){
 		 		debugger;
 		 		var fbUser = res.data;

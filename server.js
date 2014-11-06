@@ -29,7 +29,7 @@ var user = {};
 passport.use(new FacebookStrategy({
  clientID: '380054328825864',
  clientSecret: '348682659a6741a449c30aa77ee8a3aa',
- callbackURL: 'http://localhost:3000/auth/facebook/callback'
+ callbackURL: '/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 	process.nextTick(function(){
 		User.findOne({facebookId: profile.id}, function(err, user){
@@ -138,5 +138,5 @@ app.put('/vote/:id', routes.vote);
 app.get('/vote/:id', routes.vote);
 
 app.listen(port, function(){
-	console.log('Connection Success on mongoDB & http://localhost: ' + port)
+	console.log('Connection Success on mongoDB & ' + port)
 });

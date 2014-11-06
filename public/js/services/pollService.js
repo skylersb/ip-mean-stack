@@ -4,7 +4,7 @@ app.service('pollService', function($http, $q) {
 	this.getPolls = function(){
 		return $http({
 			method: 'GET',
-			url: 'http://localhost:3000/polls',
+			url: '/polls',
 		}).then(function(res){
 			return res.data;
 		})
@@ -14,7 +14,7 @@ app.service('pollService', function($http, $q) {
 		
 		return $http({
 			method: 'POST',
-			url: 'http://localhost:3000/polls',
+			url: '/polls',
 			data: poll
 		})
 	}
@@ -22,14 +22,14 @@ app.service('pollService', function($http, $q) {
 	this.getPoll = function(id) {
 	return $http({
 		method: 'GET',
-		url: 'http://localhost:3000/polls/' + id
+		url: '/polls/' + id
 	})
 }
 
 	this.castVote = function(id, option){
 		return $http ({
 			method: 'PUT',
-			url: 'http://localhost:3000/vote/' + id,
+			url: '/vote/' + id,
 			data: option
 		}).then(function(res) {
 			console.log(res)
