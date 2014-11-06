@@ -1,10 +1,9 @@
 var app = angular.module('polls')
 
-app.controller('pollControl', function(poll, $scope, $location, authService, $routeParams, pollService){
+app.controller('pollControl', function(poll, $scope, $location, $routeParams, pollService){
 	var id = poll.data._id;
 	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
 	$scope.poll = {};
-	
 
 $scope.vote = function(option) {
 	

@@ -1,4 +1,18 @@
-var app = angular.module('polls', ['ngRoute', 'ngResource'])
+var app = angular.module('polls', ['ngRoute', 'ngResource', 'ngCookies'])
+
+// app.run(function (userService, $rootScope, $location) {
+// 	if($location.path() !== '/login'){
+// 		$rootScope.$on("$routeChangeStart", function () {
+// 		var user = userService.getUser();
+// 			if(user){
+// 				$rootScope.user = user;
+// 			} else {
+// 				$location.path('/login');
+// 			}	
+// 	});
+// 	}
+// });
+
 
 app.config(function($routeProvider, $httpProvider){
 
@@ -7,7 +21,6 @@ app.config(function($routeProvider, $httpProvider){
 	.when('/polls', {
 		templateUrl: 'views/list.html',
 		controller: 'mainControl'
-		
 	})
 	.when('/profile', {
 		templateUrl: 'views/profile.html',
@@ -17,6 +30,16 @@ app.config(function($routeProvider, $httpProvider){
 		templateUrl: 'views/login.html',
 		controller: 'loginControl'
 	})
+	// .when('/home/:user', {
+	// 	templateUrl: 'views/list.html',
+	// 	controller: 'mainControl',
+	// 	resolve: 
+	// 	{
+	// 		user: function(userService, $route){
+	// 			return userService.getFacebookUser($route.current.params.user);
+	// 		}
+	// 	}
+	// })
 	.when('/polls/:pollId', {
 		templateUrl: 'views/poll.html',
 		controller: 'pollControl',
@@ -31,14 +54,26 @@ app.config(function($routeProvider, $httpProvider){
 		templateUrl: 'views/stats.html',
 		controller: 'statsControl',
 		resolve: {
-		poll: function(pollService, $route) {
+			poll: function(pollService, $route) {
 				return pollService.getPoll($route.current.params.pollId)
 			}
 		}
 	})
 	.otherwise({
-		redirectTo: '/polls'
+		redirectTo: '/login'
 	})
-
-
+ 
 });
+
+app.config(function($httpProvider) {
+  $httpProvider.interceptors.push(function($q, $location) {
+    return {
+      'responseError': function(rejection) {
+        if (rejection.status === 401) {
+          $location.path('/login');
+        }
+        return $q.reject(rejection);
+      }
+    }
+  })
+})

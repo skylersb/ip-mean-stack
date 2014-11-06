@@ -1,6 +1,9 @@
 var app = angular.module('polls')
 
-app.controller('mainControl', function($scope, pollService, $location){
+app.controller('mainControl', function($scope, pollService, $location, userService){
+// userService.setUser().then(function () {
+// 	$scope.user = userService.getUser();
+// })
 // $scope.polls = pollService.query();
 $scope.polls = [];
 
