@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
 var Sesssion = require('express-session');
-var port = 3000;	
+var port = 80;	
 var mongoose = require('mongoose');
 var PollSchema = require('./server-assets/poll/pollModel')
 var db = mongoose.createConnection('localhost', 'incredipoll');
