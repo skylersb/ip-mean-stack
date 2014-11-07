@@ -1,11 +1,11 @@
 'use strict';
 var express = require('express');
-var Sesssion = require('express-session');
+var Session = require('express-session');
 var port = 80;	
 var mongoose = require('mongoose');
-var PollSchema = require('./server-assets/poll/pollModel')
-var db = mongoose.createConnection('localhost', 'incredipoll');
-var Poll = db.model('PollSchema', PollSchema);
+var PollSchema = require('./server-assets/poll/pollModel');
+// var db = mongoose.createConnection('localhost', 'testing');
+var Poll = require('./server-assets/poll/pollModel');
 var routes = require('./server-assets/database');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -13,58 +13,78 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('./server-assets/user/userModel');
 
+var db = 'mongodb://localhost/incredipoll';
+var connection = mongoose.connection;
+
 
 
 //express, bodyParser, cors setup
 var app = express();
 app.use(cors());
+app.use(Session({
+	secret: "whatevertheheckIwantontuesdayinjuly",
+	name: 'DaPolls',
+	proxy: true,
+	resave: true,
+	saveUninitialized: true
+}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(express.session({secret: "whatevertheheckIwantontuesdayinjuly"}));
 app.use(passport.session());
 //ties in the index.html
 app.use(express.static(__dirname + '/public'));
 
 
 var user = {};
-passport.use(new FacebookStrategy({
+passport.use('facebook', new FacebookStrategy({
  clientID: '380054328825864',
  clientSecret: '348682659a6741a449c30aa77ee8a3aa',
- callbackURL: '/auth/facebook/callback'
+ callbackURL: 'http://localhost:3000/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
-	process.nextTick(function(){
-		User.findOne({facebookId: profile.id}, function(err, user){
-		console.log(err, user, "KDJLKASJLJDFLJDLFJLDSFJLDSJLDJFLJDFSL")
-		if(err){
-			return done(null, false);
-		} else {
-			if(user){
-				return done(null, user);
-			} else {
-				var newUser = new User();
-				newUser.userName = profile._json.name;
-		    newUser.facebookId = profile.id;
-		    newUser.accountCreated = profile._json.updated_time;
-		    newUser.save(function (err) {
-		    	if(err){
-		    		return done(err, null);
-		    	} else {
-		    		return done(null, newUser);
-		    	}
-		    });
-			}
-		}
+		process.nextTick(function(){
+			User.findOne({facebookId: profile.id}, function(err, user){
+			if(err) {console.log(err);}
+			if(!err && user != null){
+					done(null, user);
+				} else {
+					var newUser = new User();
+					newUser.userName = profile._json.name;
+			    newUser.facebookId = profile.id;
+			    newUser.accountCreated = profile._json.updated_time;
+			    newUser.save(function (err) {
+			    	if(err){
+			    	  console.log(err);
+			    	} else {
+			    		done(null, newUser);
+			    	}
+			    });
+				}
+			}); 
 		});
-	}); 
 }));
 
+
 passport.serializeUser(function(user, done) {
-  done(null, user);
+console.log('serializing', user)
+done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+passport.deserializeUser(function(user, done) {
+//console.log('deserializing ', user)
+done(null, user);
 });
+
+// passport.serializeUser(function(user, done) {
+//  console.log('serializeUser: ' + user._id)
+//  done(null, user._id);
+// });
+// passport.deserializeUser(function(id, done) {
+//  User.findById(id, function(err, user){
+//      console.log(user)
+//      if(!err) done(null, user);
+//      else done(err, null)
+//  })
+// });
 
 app.get('/auth/facebook',
 	passport.authenticate('facebook'));
@@ -72,18 +92,17 @@ app.get('/auth/facebook',
 
 app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
- successRedirect: '/me',
- failureRedirect: '/'
-}), function (req, res) {
-	console.log(req.session, 'THis should be the session');
-});
+ failureRedirect: '/#/login',
+ successRedirect: '/me'
+}));
 
 app.get('/me', function (req, res) {
 
 	if(req.user){
-		res.send(req.user);
+		res.cookie('pollUser', JSON.stringify(req.user));
+		res.redirect('/#/polls');
 	} else {
-		res.send("Something went wrong")
+		res.redirect('/#/login');
 	}
 })
 
@@ -138,6 +157,14 @@ app.post('/polls', routes.create);
 app.put('/vote/:id', routes.vote);
 app.get('/vote/:id', routes.vote);
 
-app.listen(port, function(){
-	console.log('Connection Success on mongoDB & ' + port)
-});
+
+
+mongoose.connect(db);
+	connection.once('open', function () {
+		console.log('Actually connected to our DB');
+
+	app.listen(port, function(){
+		console.log('Connection Success on mongoDB & ' + port)
+	});
+})
+

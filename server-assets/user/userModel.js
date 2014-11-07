@@ -1,8 +1,9 @@
  "use-strict";
-var Mongoose = require('mongoose');
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 
-var User = new Mongoose.Schema({
+var User = new Schema({
        userName: {type: String},
        facebookId: {type: String},
        accountCreated: {type: Date},
@@ -12,4 +13,4 @@ var User = new Mongoose.Schema({
        
 })
 
-module.exports = Mongoose.model("User", User);
+module.exports = mongoose.model("User", User);
