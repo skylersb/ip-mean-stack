@@ -39,7 +39,8 @@ var user = {};
 passport.use('facebook', new FacebookStrategy({
  clientID: '380054328825864',
  clientSecret: '348682659a6741a449c30aa77ee8a3aa',
- callbackURL: 'http://localhost:3000/auth/facebook/callback'
+ callbackURL: '/auth/facebook/callback'
+ // callbackURL: 'http://localhost:3000/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function(){
 			User.findOne({facebookId: profile.id}, function(err, user){
