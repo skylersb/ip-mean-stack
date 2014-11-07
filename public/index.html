@@ -7,10 +7,10 @@
 
 		<link rel="stylesheet" type="text/css" href="style/main.css">
 	</head>
-	<body >
-		<header>
+	<body ng-controller="mainControl">
+		<header ng-show="isUserLoggedIn">
 	<div id="fPTitle">IncrediP<span><i class="fa fa-question-circle"></i></span>ll</div>
-<div class="menu" ng-controller="mainControl">
+<div class="menu" >
 		<ul>
 			<li><a href="/#/polls">Home</a></li>
 			<li><a href="/#/profile">My Profile</a></li>

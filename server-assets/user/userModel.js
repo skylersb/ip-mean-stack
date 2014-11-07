@@ -8,8 +8,10 @@ var User = new Schema({
        facebookId: {type: String},
        accountCreated: {type: Date},
        email: {type: String},
-       admin: {type: Boolean, default:false}
-       // myPolls: [ {type: Mongoose.Schema.Types.ObjectId, ref: 'myPolls'} ]
+       admin: {type: Boolean, default:false},
+       votedPolls: [ {type: Mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ],
+       myPolls: [ {type: Mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ]
+
        
 })
 

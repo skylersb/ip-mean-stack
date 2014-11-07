@@ -50,9 +50,16 @@ $scope.viewStats = function(poll){
 
 $scope.getPolls();
 
-$scope.isUserLoggedIn = true;
+$scope.$watch($cookieStore.put, function () {
+	if($cookieStore.get('pollUser')){
+		$scope.isUserLoggedIn = true;
+	} else {
+		$scope.isUserLoggedIn = false;
+	}
+});
 
 $scope.fbLogOut = function(){
+	$scope.isUserLoggedIn = false;
 	$cookieStore.remove('pollUser');
 	$location.path('/logout')
 }

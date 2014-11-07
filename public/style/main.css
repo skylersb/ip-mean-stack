@@ -163,7 +163,33 @@ header {
 	text-align: center;
 	color: #fff;
 	background-color: #000;
+}
 
+.loginBox {
+	padding-top: 3%;
+	width: 50%;
+	background-color: rgba( 0, 0, 0, 0.8);
+	height: 300px;
+	margin: 10% 25% 0 25%;
+	border-radius: 4%;
+
+}
+
+#loginLogo {
+
+	margin-left: 33%;
+	
+	display: inline;
+	font-size: 3.0em;
+	font:bold;
+	color: #fff;
+	/*background-color: #000;*/
+}
+
+.fbBtn {
+
+	display: inline;
+	margin-left: 25%;
 }
 
 #fPTitle {
