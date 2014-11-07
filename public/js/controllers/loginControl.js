@@ -7,9 +7,7 @@ app.controller('loginControl', function($scope, $location, userService, $cookieS
 	}
 
 
-$scope.fbLogOut = function(){
-	$cookieStore.remove('pollUser');
-	$location.path('/logout')
-}
+
+
 
 });

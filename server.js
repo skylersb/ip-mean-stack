@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
 var Session = require('express-session');
-var port = 80;	
+var port = 3000;	
 var mongoose = require('mongoose');
 var PollSchema = require('./server-assets/poll/pollModel');
 // var db = mongoose.createConnection('localhost', 'testing');
@@ -37,10 +37,9 @@ app.use(express.static(__dirname + '/public'));
 
 var user = {};
 passport.use('facebook', new FacebookStrategy({
- clientID: '380054328825864',
- clientSecret: '348682659a6741a449c30aa77ee8a3aa',
+ clientID: 'FACEBOOK_APP_ID',
+ clientSecret: 'FACEBOOK_SECRET_ID',
  callbackURL: '/auth/facebook/callback'
- // callbackURL: 'http://localhost:3000/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function(){
 			User.findOne({facebookId: profile.id}, function(err, user){
@@ -164,8 +163,9 @@ mongoose.connect(db);
 	connection.once('open', function () {
 		console.log('Actually connected to our DB');
 
-	app.listen(port, function(){
-		console.log('Connection Success on mongoDB & ' + port)
-	});
+	// app.listen(port, function(){
+	// 	console.log('Connection Success on mongoDB & ' + port)
+	// });
+	app.listen(process.env.EXPRESS_PORT || 3000)
 })
 

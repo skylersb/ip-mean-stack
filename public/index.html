@@ -10,11 +10,13 @@
 	<body >
 		<header>
 	<div id="fPTitle">IncrediP<span><i class="fa fa-question-circle"></i></span>ll</div>
-<div class="menu">
+<div class="menu" ng-controller="mainControl">
 		<ul>
-			<li><a href="/">Home</a></li>
+			<li><a href="/#/polls">Home</a></li>
 			<li><a href="/#/profile">My Profile</a></li>
-			<li><a href="/#/login">Log In</a></li>
+			<li><a ng-click="fbLogOut()" ng-show="isUserLoggedIn" href="/#/logout">Log Out</a></li>
+			<!-- <li><a ng-show="!isUserLoggedIn" href="/#/login">Log In</a></li> -->
+
 		</ul>
 	</div>
 	</header>

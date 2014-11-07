@@ -1,6 +1,6 @@
 var app = angular.module('polls')
 
-app.controller('mainControl', function($scope, pollService, $location, userService){
+app.controller('mainControl', function($scope, pollService, $location, userService, $cookieStore){
 // userService.setUser().then(function () {
 // 	$scope.user = userService.getUser();
 // })
@@ -50,5 +50,11 @@ $scope.viewStats = function(poll){
 
 $scope.getPolls();
 
+$scope.isUserLoggedIn = true;
+
+$scope.fbLogOut = function(){
+	$cookieStore.remove('pollUser');
+	$location.path('/logout')
+}
 
 });
