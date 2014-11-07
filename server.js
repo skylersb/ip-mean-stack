@@ -37,8 +37,8 @@ app.use(express.static(__dirname + '/public'));
 
 var user = {};
 passport.use('facebook', new FacebookStrategy({
- clientID: 'FACEBOOK_APP_ID',
- clientSecret: 'FACEBOOK_SECRET_ID',
+ clientID: process.env.FACEBOOK_APP_ID,
+ clientSecret: process.env.FACEBOOK_SECRET_ID,
  callbackURL: '/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function(){
