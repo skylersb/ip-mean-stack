@@ -1,15 +1,15 @@
 var app = angular.module('polls', ['ngRoute', 'ngResource', 'ngCookies'])
 
-app.run(function (userService, $rootScope, $location) {
-		$rootScope.$on("$routeChangeStart", function () {
-		var user = userService.getUser();
-			if(user){
-				$rootScope.user = user;
-			} else {
-				$location.path('/login');
-			}	
-	});
-});
+// app.run(function (userService, $rootScope, $location) {
+// 		$rootScope.$on("$routeChangeStart", function () {
+// 		var user = userService.getUser();
+// 			if(user){
+// 				$rootScope.user = user;
+// 			} else {
+// 				$location.path('/login');
+// 			}	
+// 	});
+// });
 
 
 app.config(function($routeProvider, $httpProvider){

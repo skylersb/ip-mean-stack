@@ -34,7 +34,7 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 
 		$scope.poll.pollOptions.splice($scope.poll.pollOptions.indexOf(), 1);
 	}
-	
+
 	$scope.getPolls = function(polls){
 		pollService.getPolls().then(function(polls){
 			$scope.polls = polls;
@@ -46,8 +46,9 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 				}
 			}
 		});
-
 	}
+
+
 	
 
 	$scope.testCreatePoll = function() {
