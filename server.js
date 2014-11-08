@@ -151,11 +151,11 @@ var requireAuth = function(req, res, next) {
 
 //requests
 app.get('/', routes.index);
-app.get('/polls', routes.list);
-app.get('/polls/:id', routes.poll);
-app.post('/polls', routes.create);
-app.put('/vote/:id', routes.vote);
-app.get('/vote/:id', routes.vote);
+app.get('/polls', requireAuth, routes.list);
+app.get('/polls/:id', requireAuth, routes.poll);
+app.post('/polls', requireAuth, routes.create);
+app.put('/vote/:id', requireAuth, routes.vote);
+app.get('/vote/:id', requireAuth,routes.vote);
 
 
 

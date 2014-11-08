@@ -32,7 +32,7 @@ app.service('pollService', function($http, $q) {
 			url: '/vote/' + id,
 			data: option
 		}).then(function(res) {
-			console.log(res)
+			console.log(res.data)
 			return res.data
 		})
 	}

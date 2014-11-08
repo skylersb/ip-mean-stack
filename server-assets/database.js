@@ -5,6 +5,7 @@ var PollSchema = require('./poll/pollModel').PollSchema;
 var cors = require('cors');
 var Poll = db.model('PollSchema', PollSchema);
 var bodyParser = require('body-parser');
+var User = require('./user/userModel');
 module.exports.index = function(req, res) {
   res.render('index', {title: 'Polls'});
 };
@@ -64,7 +65,8 @@ module.exports.create = function(req, res) {
 
 
 module.exports.vote = function(req, res) {
-  console.log(req.body);
+  console.log(req.body)
+  console.log(req.user)
   Poll.findOne({_id: req.params.id}).exec(function(err, poll){
     if(err){
       console.log("ERR is ", err)
@@ -75,17 +77,39 @@ module.exports.vote = function(req, res) {
       for(var i = 0; i < poll.pollOptions.length; i++){
         console.log(poll.pollOptions[i]);
         if(poll.pollOptions[i]._id == option._id){
-          console.log('Found Poll Opotion')
+          console.log('Found Poll Option')
           poll.pollOptions[i].votes = option.votes;
         }
       }
-      poll.save(function (err) {
+     
+      User.findByIdAndUpdate(
+        req.user._id,
+        {$push: {"votedPolls": poll._id}},
+        {upsert:false},
+        function(err, user){
+          if(err){
+              console.log(err);
+          }else{
+              // console.log("Successfully added");
+              console.log("Successfully added to: " + user);
+              var currentUser = user;
+                poll.save(function (err) {
         if(err){
           res.send(err)
         } else {
-          res.send(poll);
+          // res.send(poll);
+          res.json(currentUser.votedPolls);
         }
       })
+          }
+        }
+      );
+      // req.user.save(function (err){
+      //   if(err){
+      //     console.log(err);
+      //   }
+      // })
+    
     }
   })
 };

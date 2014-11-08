@@ -9,8 +9,8 @@ var User = new Schema({
        accountCreated: {type: Date},
        email: {type: String},
        admin: {type: Boolean, default:false},
-       votedPolls: [ {type: Mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ],
-       myPolls: [ {type: Mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ]
+       votedPolls: [ {type: mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ],
+       myPolls: [ {type: mongoose.Schema.Types.ObjectId, ref: 'PollSchema'} ]
 
        
 })

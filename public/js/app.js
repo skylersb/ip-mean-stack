@@ -13,6 +13,8 @@ app.run(function (userService, $rootScope, $location) {
 
 
 app.config(function($routeProvider, $httpProvider){
+	$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  $httpProvider.interceptors.push('myHttpInterceptor');
 
 	//router here
 	$routeProvider
@@ -63,8 +65,8 @@ app.config(function($routeProvider, $httpProvider){
  
 });
 
-app.config(function($httpProvider) {
-  $httpProvider.interceptors.push(function($q, $location) {
+app.factory('myHttpInterceptor', function($q, $location) {
+  // $httpProvider.interceptors.push(function($q, $location) {
     return {
       'responseError': function(rejection) {
         if (rejection.status === 401) {
@@ -72,6 +74,6 @@ app.config(function($httpProvider) {
         }
         return $q.reject(rejection);
       }
-    }
-  })
+    
+  }
 })

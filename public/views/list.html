@@ -39,8 +39,8 @@
 				<!-- </div> -->
 
 				<!-- TAKE POLL BTN -->
-				<button ng-click="takePoll(poll)" class="btn btn-primary">Take Poll</button>
-				<button ng-click="viewStats(poll)" class="btn btn-primary">View Stats</button>
+				<button ng-show="!poll.pollTaken" ng-click="takePoll(poll)" class="btn btn-primary">Take Poll</button>
+				<button ng-show="poll.pollTaken" ng-click="viewStats(poll)" class="btn btn-primary">View Stats</button>
 			</div>
 		</div>
 	</div>
