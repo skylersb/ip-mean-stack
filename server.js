@@ -66,12 +66,15 @@ passport.use('facebook', new FacebookStrategy({
 
 passport.serializeUser(function(user, done) {
 console.log('serializing', user)
-done(null, user);
+done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function(id, done) {
+	User.findById(id).exec(function(err, user){
+		done(err, user);
+	})
 //console.log('deserializing ', user)
-done(null, user);
+// done(null, user);
 });
 
 // passport.serializeUser(function(user, done) {
@@ -93,17 +96,18 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
  failureRedirect: '/#/login',
- successRedirect: '/me'
+ successRedirect: '/#/polls'
 }));
 
 app.get('/me', function (req, res) {
 
-	if(req.user){
-		res.cookie('pollUser', JSON.stringify(req.user));
-		res.redirect('/#/polls');
-	} else {
-		res.redirect('/#/login');
-	}
+	// if(req.user){
+	// 	res.json(req.user);
+	// 	res.redirect('/#/polls');
+	// } else {
+	// 	res.redirect('/#/login');
+	// }
+	return res.json(req.user);
 })
 
 // app.get('/me', function(req, res){

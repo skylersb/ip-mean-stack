@@ -1,13 +1,8 @@
 var app = angular.module('polls');
 
-app.service('userService', function($http, $q, $cookieStore, $location){
+app.service('userService', function($http, $q, $location){
 
-
-	this.getUser = function() {
-		return $cookieStore.get('pollUser');
-	};
-
-	this.setUser = function(){
+	this.getUser = function(){
 		 	return $http ({
 		 		method: 'GET',
 		 		url: '/me'
