@@ -101,6 +101,12 @@ padding-top: 5px;
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
+#takePollBtn{
+
+	/*background-color: #389AF0;*/
+	background-color: #E46C1C;
+}
+
 #backToPollsBtn {
 	background-color: rgba(0, 0, 0, 0.8);
 	color: #fff;
