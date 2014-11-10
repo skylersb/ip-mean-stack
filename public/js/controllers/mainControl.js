@@ -46,15 +46,12 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = true;
-				} else {
-					$scope.trendingPolls[i].pollTaken = false;
-					}
-
-
-				if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+				} else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
 					$scope.polls[i].pollTaken = true;
 				} else {
 					$scope.polls[i].pollTaken = false;
+					$scope.trendingPolls[i].pollTaken = false;
+					
 				}
 			}
 		});

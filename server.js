@@ -3,7 +3,6 @@ var express = require('express');
 var Session = require('express-session');
 var port = 3000;	
 var mongoose = require('mongoose');
-var PollSchema = require('./server-assets/poll/pollModel');
 // var db = mongoose.createConnection('localhost', 'testing');
 var Poll = require('./server-assets/poll/pollModel');
 var routes = require('./server-assets/database');

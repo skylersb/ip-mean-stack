@@ -11,11 +11,11 @@ var optionSchema = new Schema({
 	voted: [voteSchema]
 });
 
-var PollSchema = new Schema({
+var Poll = new Schema({
 	question: {type: String, required: true},
 	pollOptions: [optionSchema],
 	allVotes: {type: Number, default: 0}
 	// category: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Poll', PollSchema);
+module.exports = mongoose.model('Poll', Poll);
