@@ -6,6 +6,7 @@ app.service('pollService', function($http, $q) {
 			method: 'GET',
 			url: '/polls',
 		}).then(function(res){
+			console.log(res.data);
 			return res.data;
 		})
 	}

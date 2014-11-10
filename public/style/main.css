@@ -153,13 +153,18 @@ h1 {
 }
 
 .mainPolls {
-
-	padding: 5px 0;
+	width: 100%;
+	padding: 5px 0px;
 	text-align: center;
 	background-color: rgba(255, 255, 255, 0.6);
 	color: #000;
-	margin: 10px;
+	margin: 10px 0px;
 	border-radius: 5px;
+
+}
+
+#searchPolls {
+	text-align: center;
 
 }
 

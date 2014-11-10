@@ -36,9 +36,21 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 	}
 
 	$scope.getPolls = function(polls){
+		$scope.trendingPolls = [];
+		$scope.limit = 0;
 		pollService.getPolls().then(function(polls){
 			$scope.polls = polls;
 			for(var i = 0; i < $scope.polls.length; i++){
+					if($scope.polls[i].allVotes >= 10 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+						$scope.trendingPolls.push(polls[i]);
+						$scope.polls.splice(i, 1);
+						$scope.limit++;
+						$scope.trendingPolls[i].pollTaken = true;
+				} else {
+					$scope.trendingPolls[i].pollTaken = false;
+					}
+
+
 				if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
 					$scope.polls[i].pollTaken = true;
 				} else {

@@ -1,9 +1,8 @@
 
 var mongoose = require('mongoose');
 var db = mongoose.createConnection('localhost', 'incredipoll');
-var PollSchema = require('./poll/pollModel').PollSchema;
+var Poll = require('./poll/pollModel');
 var cors = require('cors');
-var Poll = db.model('PollSchema', PollSchema);
 var bodyParser = require('body-parser');
 var User = require('./user/userModel');
 module.exports.index = function(req, res) {
@@ -13,7 +12,7 @@ module.exports.index = function(req, res) {
 
 // JSON API for list of polls
 module.exports.list = function(req, res) { 
-  Poll.find({}, 'question', function(error, polls) {
+  Poll.find().exec(function(error, polls) {
     res.json(polls);
   });
 };
@@ -93,6 +92,7 @@ module.exports.vote = function(req, res) {
               // console.log("Successfully added");
               console.log("Successfully added to: " + user);
               var currentUser = user;
+              poll.allVotes++;
                 poll.save(function (err) {
         if(err){
           res.send(err)
