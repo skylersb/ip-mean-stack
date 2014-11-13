@@ -40,31 +40,40 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 		$scope.limit = 0;
 		pollService.getPolls().then(function(polls){
 			$scope.polls = polls;
-			for(var i = 0; i < $scope.polls.length; i++){
-				// for(var j = 0; j < $scope.trendingPolls.length; j++){
-					if($scope.user && $scope.polls[i].allVotes >= 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+				for(var i = 0; i < $scope.polls.length; i++){
+					//a trending poll that has been taken will display 'view stats'
+					if($scope.polls[i].allVotes >= 2 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = true;
-					} else if($scope.user && $scope.polls[i].allVotes >= 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) < 0){
+						//a trending poll that has NOT been taken will display 'take poll'
+				} else if($scope.polls[i].allVotes >= 2 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) < 0){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = false;
-					} else if($scope.user && $scope.polls[i].allVotes < 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
-						$scope.polls[i].pollTaken = true;
-						$scope.trendingPolls[i].pollTaken = false; 
-				// } else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
-				// 	$scope.polls[i].pollTaken = true;
-				} else {
+						//a poll that has been taken but not trending will display 'view stats'
+				} else if ($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes < 2){
 					$scope.polls[i].pollTaken = true;
-					$scope.trendingPolls[i].pollTaken = false;
+						
+					}
+
+
+				if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes >= 2) {
+					$scope.polls[i].pollTaken = true;
+					$scope.trendingPolls.push(polls[i]);
+						$scope.polls.splice(i, 1);
+						$scope.limit++;
+						$scope.trendingPolls[i].pollTaken = true;
+
+				} else {
+					$scope.polls[i].pollTaken = false;
 				}
 			}
 		});
-		console.log($scope.trendingPolls)
 	}
+
 
 
 	
