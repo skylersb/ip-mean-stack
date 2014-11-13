@@ -41,20 +41,29 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 		pollService.getPolls().then(function(polls){
 			$scope.polls = polls;
 			for(var i = 0; i < $scope.polls.length; i++){
-					if($scope.polls[i].allVotes >= 10 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+				// for(var j = 0; j < $scope.trendingPolls.length; j++){
+					if($scope.user && $scope.polls[i].allVotes >= 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = true;
-				} else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
-					$scope.polls[i].pollTaken = true;
+					} else if($scope.user && $scope.polls[i].allVotes >= 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) < 0){
+						$scope.trendingPolls.push(polls[i]);
+						$scope.polls.splice(i, 1);
+						$scope.limit++;
+						$scope.trendingPolls[i].pollTaken = false;
+					} else if($scope.user && $scope.polls[i].allVotes < 3 && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+						$scope.polls[i].pollTaken = true;
+						$scope.trendingPolls[i].pollTaken = false; 
+				// } else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+				// 	$scope.polls[i].pollTaken = true;
 				} else {
-					$scope.polls[i].pollTaken = false;
+					$scope.polls[i].pollTaken = true;
 					$scope.trendingPolls[i].pollTaken = false;
-					
 				}
 			}
 		});
+		console.log($scope.trendingPolls)
 	}
 
 
