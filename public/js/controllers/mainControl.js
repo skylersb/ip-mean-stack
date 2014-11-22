@@ -3,7 +3,11 @@ var app = angular.module('polls')
 app.controller('mainControl', function($rootScope, $scope, pollService, $location, userService){
 
 
+$scope.createPollBtn = true;
 
+$scope.showPollSetup = function(){
+	$scope.createPollBtn = false;
+}
 
 	$scope.updateUser = function(){
 		userService.getUser().then(function(data){
@@ -42,31 +46,21 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 			$scope.polls = polls;
 				for(var i = 0; i < $scope.polls.length; i++){
 					//a trending poll that has been taken will display 'view stats'
-					if($scope.polls[i].allVotes >= 2 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1){
+					if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes >= 2){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = true;
 						//a trending poll that has NOT been taken will display 'take poll'
-				} else if($scope.polls[i].allVotes >= 2 && $scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) < 0){
+				} else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) < 0 && $scope.polls[i].allVotes >= 2){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						$scope.limit++;
 						$scope.trendingPolls[i].pollTaken = false;
-						//a poll that has been taken but not trending will display 'view stats'
-				} else if ($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes < 2){
-					$scope.polls[i].pollTaken = true;
-						
-					}
-
-
-				if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes >= 2) {
-					$scope.polls[i].pollTaken = true;
-					$scope.trendingPolls.push(polls[i]);
-						$scope.polls.splice(i, 1);
-						$scope.limit++;
-						$scope.trendingPolls[i].pollTaken = true;
-
+						//a poll that has been taken and NOT trending will display 'view stats'
+				} else if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes < 2) {
+							$scope.polls[i].pollTaken = true;
+							$scope.limit++;
 				} else {
 					$scope.polls[i].pollTaken = false;
 				}
@@ -84,6 +78,7 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 			question: '',
 			pollOptions: [{text: ''}, {text: ''}]
 		};
+		$scope.createPollBtn = true;
 		$scope.getPolls();
 	}
 

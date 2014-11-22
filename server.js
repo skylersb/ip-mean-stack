@@ -1,9 +1,10 @@
 'use strict';
 var express = require('express');
+var app = express();
 var Session = require('express-session');
-var port = 3000;	
+var server = require('http').Server(app);
 var mongoose = require('mongoose');
-// var db = mongoose.createConnection('localhost', 'testing');
+var io = require('socket.io')(server);
 var Poll = require('./server-assets/poll/pollModel');
 var routes = require('./server-assets/database');
 var bodyParser = require('body-parser');
@@ -11,9 +12,9 @@ var cors = require('cors');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('./server-assets/user/userModel');
-
 var db = 'mongodb://localhost/incredipoll';
 var connection = mongoose.connection;
+var port = 3000;	
 
 
 

@@ -19,6 +19,11 @@ body {
 	text-align: center;
 }
 
+#createAPollBtn{
+	text-align: center;
+	margin: 1% 0 0 45%;
+}
+
 #questionBox {
 	margin-bottom: .5%;
 	padding: 1.5%;
