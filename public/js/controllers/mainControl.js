@@ -1,9 +1,13 @@
 var app = angular.module('polls')
 
-app.controller('mainControl', function($rootScope, $scope, pollService, $location, userService){
+app.controller('mainControl', function($rootScope, $scope, $location, pollService, socket, userService){
 
+  // Socket Handlers
+	socket.emit('joinRoom', 'mainRoom');
 
-
+  socket.on('pollCreated', function(){
+		$scope.getPolls();
+	});
 
 	$scope.updateUser = function(){
 		userService.getUser().then(function(data){
@@ -13,6 +17,7 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 			} else {
 				$scope.isUserLoggedIn = false;
 			}
+			
 			$scope.getPolls();
 		})
 	}
@@ -59,7 +64,6 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 						
 					}
 
-
 				if($scope.user && $scope.user.votedPolls.indexOf($scope.polls[i]._id) > -1 && $scope.polls[i].allVotes >= 2) {
 					$scope.polls[i].pollTaken = true;
 					$scope.trendingPolls.push(polls[i]);
@@ -74,21 +78,16 @@ app.controller('mainControl', function($rootScope, $scope, pollService, $locatio
 		});
 	}
 
-
-
-	
-
 	$scope.testCreatePoll = function() {
 		pollService.addPoll($scope.poll)
 		$scope.poll = {
 			question: '',
 			pollOptions: [{text: ''}, {text: ''}]
 		};
-		$scope.getPolls();
+		socket.emit('pollCreated')
 	}
 
 	$scope.takePoll = function(poll){
-
 		$location.path('/polls/' + poll._id);	
 	}
 
