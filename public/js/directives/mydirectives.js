@@ -8,6 +8,7 @@ app.directive('createChart', function(pollService) {
 		},
 		template: '<div id="chartdiv" style="width: 100%; height: 400px;" ></div>',
 		link: function(scope, element, attrs) {
+
 			var chart = false;
 			var initChart = function(pieNums1) {
 				// console.log('run')
@@ -47,6 +48,10 @@ app.directive('createChart', function(pollService) {
 			}
 			// console.log(scope.pollOptions)
 			initChart(scope.pollOptions)
+			scope.$on('updateGraph', function(data, pollData){
+				console.log(pollData)
+				initChart(pollData)
+			})
 		}
 	}
 })

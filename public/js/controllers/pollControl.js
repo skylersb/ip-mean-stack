@@ -1,9 +1,12 @@
 var app = angular.module('polls')
 
-app.controller('pollControl', function(poll, $scope, $location, $routeParams, pollService, $rootScope){
+app.controller('pollControl', function(socket, poll, $scope, $location, $routeParams, pollService, $rootScope){
 	var id = poll.data._id;
 	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
 	$scope.poll = {};
+
+
+	socket.emit('joinRoom', id + "");
 
 $scope.vote = function(option) {
 	
@@ -13,6 +16,8 @@ $scope.vote = function(option) {
 		console.log(res);
 		$rootScope.$broadcast('updateUser')
 		$location.path('/polls/' + id + '/stats')
+		$rootScope.$broadcast('updateGraph')
+	socket.emit('voted', $routeParams.pollId)
 	})
 	}
 	
@@ -28,3 +33,7 @@ $scope.vote = function(option) {
 
 
 });
+
+//Next Step: have client leave mainroom and join
+//a poll room. From there, setup socket events on 
+//vote function and get poll function

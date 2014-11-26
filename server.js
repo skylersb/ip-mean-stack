@@ -163,6 +163,7 @@ app.get('/vote/:id', requireAuth,routes.vote);
 
 
 
+
 mongoose.connect(db);
 	connection.once('open', function () {
 		console.log('Actually connected to our DB');

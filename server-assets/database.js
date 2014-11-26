@@ -22,23 +22,23 @@ module.exports.poll = function(req, res) {
   var pollId = req.params.id;
   Poll.findById(pollId, '', { lean: true }, function(err, poll) {
     if(poll) {
-      var userVoted = false,
-      userPollOption,
-      totalVotes = 0;
-      for(o in poll.pollOptions) {
-        var pollOption = poll.pollOptions[o]; 
-        for(v in pollOption.votes) {
-          var vote = pollOption.votes[v];
-          totalVotes++;
-          if(vote.ip === (req.header('x-forwarded-for') || req.ip)) {
-            userVoted = true;
-            userPollOption = { _id: pollOption._id, text: pollOption.text };
-          }
-        }
-      }
-      poll.userVoted = userVoted;
-      poll.userPollOption = userPollOption;
-      poll.totalVotes = totalVotes;
+      // var userVoted = false,
+      // userPollOption,
+      // totalVotes = 0;
+      // for(o in poll.pollOptions) {
+      //   var pollOption = poll.pollOptions[o]; 
+      //   for(v in pollOption.votes) {
+      //     var vote = pollOption.votes[v];
+      //     totalVotes++;
+      //     if(vote.ip === (req.header('x-forwarded-for') || req.ip)) {
+      //       userVoted = true;
+      //       userPollOption = { _id: pollOption._id, text: pollOption.text };
+      //     }
+      //   }
+      // }
+      // poll.userVoted = userVoted;
+      // poll.userPollOption = userPollOption;
+      // poll.totalVotes = totalVotes;
       res.json(poll);
     } else {
       res.json({error:true});
@@ -74,9 +74,9 @@ module.exports.vote = function(req, res) {
     if(poll){
       var option = req.body
       for(var i = 0; i < poll.pollOptions.length; i++){
-        console.log(poll.pollOptions[i]);
+        // console.log(poll.pollOptions[i]);
         if(poll.pollOptions[i]._id == option._id){
-          console.log('Found Poll Option')
+          // console.log('Found Poll Option')
           poll.pollOptions[i].votes = option.votes;
         }
       }
@@ -93,6 +93,7 @@ module.exports.vote = function(req, res) {
               console.log("Successfully added to: " + user);
               var currentUser = user;
               poll.allVotes++;
+
                 poll.save(function (err) {
         if(err){
           res.send(err)
