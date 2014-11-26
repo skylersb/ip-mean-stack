@@ -2,6 +2,12 @@ var app = angular.module('polls')
 
 app.controller('mainControl', function($rootScope, $scope, $location, pollService, socket, userService){
 
+$scope.createPollBtn = true;
+
+$scope.showPollSetup = function(){
+	$scope.createPollBtn = false;
+}
+
   // Socket Handlers
 	socket.emit('joinRoom', 'mainRoom');
 
@@ -40,7 +46,7 @@ app.controller('mainControl', function($rootScope, $scope, $location, pollServic
 				for(var i = 0; i < $scope.polls.length; i++){
 				//a trending poll that has been taken will display 'view stats'
 				
-				if($scope.polls[i].allVotes >= 2 && $scope.user){
+				if($scope.polls[i].allVotes >= 5 && $scope.user){
 						$scope.trendingPolls.push(polls[i]);
 						$scope.polls.splice(i, 1);
 						i--;

@@ -1,10 +1,11 @@
 'use strict';
 var express = require('express');
 var app = express();
-var Session = require('express-session');
 var server = require('http').Server(app);
-var mongoose = require('mongoose');
 var io = require('socket.io')(server);
+var Session = require('express-session');
+var port = 3000;	
+var mongoose = require('mongoose');
 var Poll = require('./server-assets/poll/pollModel');
 var routes = require('./server-assets/database');
 var bodyParser = require('body-parser');
@@ -12,14 +13,14 @@ var cors = require('cors');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('./server-assets/user/userModel');
+
 var db = 'mongodb://localhost/incredipoll';
 var connection = mongoose.connection;
-var port = 3000;	
 
 
 
 //express, bodyParser, cors setup
-var app = express();
+
 app.use(cors());
 app.use(Session({
 	secret: "whatevertheheckIwantontuesdayinjuly",
@@ -161,18 +162,39 @@ app.post('/polls', requireAuth, routes.create);
 app.put('/vote/:id', requireAuth, routes.vote);
 app.get('/vote/:id', requireAuth,routes.vote);
 
+io.on('connection', function(socket){
+	console.log('Connection made!')
 
+	socket.emit('connection')
 
+	socket.on('joinRoom', function(room){
+		socket.join(room);
+	});
+
+	socket.on('pollCreated', function(){
+		io.to('mainRoom').emit('pollCreated');
+	});
+
+socket.on('joinRoom', function(room){
+		socket.join(room);
+	
+
+socket.on('voted', function(room){
+	io.to(room).emit('voted')
+	// socket.join('joinRoom', function(err, room){
+	// 		io.sockets.to(room).emit('voted')
+	// 	})
+})
+});
+
+})
 
 mongoose.connect(db);
 	connection.once('open', function () {
 		console.log('Actually connected to our DB');
 
-	// app.listen(port, function(){
-	// 	console.log('Connection Success on mongoDB & ' + port)
-	// });
-	app.listen(process.env.EXPRESS_PORT || 3000, function(){
+	
+	server.listen(process.env.EXPRESS_PORT || 3000, function(){
 		console.log('Connection Success on mongoDB & ' + 3000)
 	});
 })
-
