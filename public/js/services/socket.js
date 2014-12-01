@@ -1,7 +1,7 @@
 var app = angular.module('polls');
 
 app.factory('socket', function($rootScope) {
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('incredipoll.com');
   return {
     on: function (eventName, callback) {
       socket.on(eventName, function () {  
