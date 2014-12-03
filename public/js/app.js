@@ -1,4 +1,4 @@
-var app = angular.module('polls', ['ngRoute', 'angulike', 'ngResource', 'ngCookies'])
+var app = angular.module('polls', ['ngRoute', 'ngSanitize', 'angulike', 'ngResource', 'ngCookies'])
 
 app.run([
       '$rootScope', function($rootScope) {
