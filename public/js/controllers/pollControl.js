@@ -6,6 +6,7 @@ app.controller('pollControl', function(socket, poll, $scope, $location, $routePa
 	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
 	$scope.poll = {};
 	$scope.singlePoll = poll.data;
+	$rootScope.singlePoll = poll.data;
 
 console.log("this is poll " + $scope.thePollId)
  $scope.myModel = {
