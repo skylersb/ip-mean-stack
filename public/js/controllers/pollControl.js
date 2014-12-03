@@ -9,9 +9,9 @@ app.controller('pollControl', function(socket, poll, $scope, $location, $routePa
 
 console.log("this is poll " + $scope.thePollId)
  $scope.myModel = {
-              Name: $scope.singlePoll.question,
+              Name: $scope.singlePoll.question
               // ImageUrl: 'http://www..jpg',
-              FbLikeUrl: 'http://www.incredipoll.com/polls/' + $scope.thePollId
+              // FbLikeUrl: 'http://www.incredipoll.com/polls/' + $scope.thePollId
               
           };
 
