@@ -1,9 +1,9 @@
 <!-- POLL QUESTION -->
-		
+<meta name="description" ng-model="singlePoll.question">
 <div id="pollQuestion" class="pollQuestion">
-	
-	<h1>{{singlePoll.question}}</h1>
-	<p>This is a poll question</p>
+		<h1>This is a poll question</h1>
+
+	<p>{{singlePoll.question}}</p>
 	<div ng-hide="poll.userVoted">
 		<br />
 		<br />

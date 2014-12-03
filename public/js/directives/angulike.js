@@ -1,9 +1,10 @@
+(function () {
     angular.module('angulike', [])
 
       .directive('fbLike', [
           '$window', '$rootScope', function ($window, $rootScope) {
               return {
-                  restrict: 'AE',
+                  restrict: 'A',
                   scope: {
                       fbLike: '=?'
                   },
@@ -167,3 +168,4 @@
           }
       ]);
 
+})();
