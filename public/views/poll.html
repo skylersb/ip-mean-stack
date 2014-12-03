@@ -1,9 +1,12 @@
 <!-- POLL QUESTION -->
-<title>{{singlePoll.question}}</title>
+<head>
+    <meta property="og:title" content="{{singlePoll.question}}" />
+  <!--   <meta property="og:description" content="{{page.description }}"/> -->
+   <!--  <meta property="og:image" content="{{page.image}}"/> -->
+</head>
 <div id="pollQuestion" class="pollQuestion">
-		<h1>This is a poll question</h1>
-
-	<p>{{singlePoll.question}}</p>
+		<h1>{{singlePoll.question}}</h1>
+		<p>This is a poll question</p>
 	<div ng-hide="poll.userVoted">
 		<br />
 		<br />
