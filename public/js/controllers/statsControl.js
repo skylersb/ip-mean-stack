@@ -1,6 +1,21 @@
 var app = angular.module('polls')
 
 app.controller('statsControl', function($rootScope, $scope, $routeParams, $location, socket, poll, pollService){
+	
+	var id = poll.data._id;
+	$scope.thePollId = poll.data._id;
+	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
+	$scope.poll = {};
+
+console.log("this is poll " + $scope.thePollId)
+ $scope.myModel = {
+              Name: "IncrediPoll",
+              // ImageUrl: 'http://www.jasonwatmore.com/pics/jason-watmore.jpg',
+              FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
+              
+          };
+          console.log($scope.myModel.FbLikeUrl)
+
 	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
 	
   // when new vote comes in refresh stats using socket.on

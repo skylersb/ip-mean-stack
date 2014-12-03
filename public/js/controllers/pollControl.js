@@ -2,9 +2,17 @@ var app = angular.module('polls')
 
 app.controller('pollControl', function(socket, poll, $scope, $location, $routeParams, pollService, $rootScope){
 	var id = poll.data._id;
+	$scope.thePollId = poll.data._id;
 	$scope.poll = pollService.getPoll({pollId: $routeParams.pollId});
 	$scope.poll = {};
 
+console.log("this is poll " + $scope.thePollId)
+ $scope.myModel = {
+              Name: "IncrediPoll",
+              // ImageUrl: 'http://www.jasonwatmore.com/pics/jason-watmore.jpg',
+              FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId
+              
+          };
 
 	socket.emit('joinRoom', id + "");
 

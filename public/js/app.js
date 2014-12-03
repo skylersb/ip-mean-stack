@@ -1,4 +1,10 @@
-var app = angular.module('polls', ['ngRoute', 'ngResource', 'ngCookies'])
+var app = angular.module('polls', ['ngRoute', 'angulike', 'ngResource', 'ngCookies'])
+
+app.run([
+      '$rootScope', function($rootScope) {
+          $rootScope.facebookAppId = '380054328825864';
+      }
+  ]);
 
 // app.run(function (userService, $rootScope, $location) {
 // 		$rootScope.$on("$routeChangeStart", function () {
