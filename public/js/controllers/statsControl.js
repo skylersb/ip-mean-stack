@@ -10,7 +10,7 @@ app.controller('statsControl', function($rootScope, $scope, $routeParams, $locat
 
 console.log("this is poll " + $scope.thePollId)
  $scope.myModel = {
-              Name: "IncrediPoll",
+              Name: $scope.singlePoll.question,
               // ImageUrl: 'http://www..jpg',
               // FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
               // FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
