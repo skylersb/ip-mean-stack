@@ -13,7 +13,7 @@ console.log("this is poll " + $scope.singlePoll.question)
               Name: "Does this change?",
               // ImageUrl: 'http://www..jpg',
               // FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
-              FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
+              FbLikeUrl: 'http://www.incredipoll.com/polls/' + $scope.thePollId + '/stats'
               // FbLikeUrl: 'http://10.0.0.210:3000/polls/' + $scope.thePollId + '/stats'
           };
          
