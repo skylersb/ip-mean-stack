@@ -8,7 +8,7 @@ app.controller('statsControl', function($rootScope, $scope, $routeParams, $locat
 	$scope.poll = {};
 	$scope.singlePoll = poll.data;
 
-console.log("this is poll " + $scope.thePollId)
+console.log("this is poll " + $scope.singlePoll.question)
  $scope.myModel = {
               Name: $scope.singlePoll.question,
               // ImageUrl: 'http://www..jpg',
@@ -16,8 +16,7 @@ console.log("this is poll " + $scope.thePollId)
               // FbLikeUrl: 'http://www.incredipoll.com/#/polls/' + $scope.thePollId + '/stats'
               // FbLikeUrl: 'http://10.0.0.210:3000/polls/' + $scope.thePollId + '/stats'
           };
-          console.log($scope.myModel.FbLikeUrl)
-	
+         
   // when new vote comes in refresh stats using socket.on
 
 
