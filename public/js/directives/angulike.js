@@ -3,7 +3,7 @@
       .directive('fbLike', [
           '$window', '$rootScope', function ($window, $rootScope) {
               return {
-                  restrict: 'A',
+                  restrict: 'AE',
                   scope: {
                       fbLike: '=?'
                   },
