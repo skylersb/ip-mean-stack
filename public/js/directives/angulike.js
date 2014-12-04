@@ -1,4 +1,4 @@
-(function () {
+
   angular.module('angulike', [])
 
   .directive('fbLike', [
@@ -167,5 +167,3 @@
                       };
                     }
                     ]);
-
-})();

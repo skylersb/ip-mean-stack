@@ -257,7 +257,6 @@ header {
 #optionBtn {
 	margin: 4%;
 	color: blue;
-
 }
 
 .statsWindow {
@@ -268,20 +267,6 @@ header {
     font-size: 0!important;
 }
 
-/*BASIC RESULTS (REPLACE WITH AM CHART INFO)*/
-/* body { padding-top: 50px; }
-        .result-table {
-          margin: 20px 0;
-          width: 100%;
-          border-collapse: collapse;
-        }
-        .result-table td { padding: 8px; }
-        .result-table > tbody > tr > td:first-child {
-          width: 25%;
-          max-width: 300px;
-          text-align: right;
-        }
-        .result-table td table {
-          background-color: lightblue;
-          text-align: right;
-        }*/
+.socialContainer {
+	margin: 5% 0 0 35%;
+}
