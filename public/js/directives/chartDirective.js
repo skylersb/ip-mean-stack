@@ -23,6 +23,7 @@ app.directive('createChart', function(pollService) {
 					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
 					"depth3D": 15,
 					"depth3D": 15,
+					"startDuration": 0,
 					"pullOutRadius": "10%",
 					"startRadius": "0%",
 					"pullOutDuration": 0,
