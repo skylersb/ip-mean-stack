@@ -25,7 +25,7 @@ body {
 
 #createAPollBtn{
 	text-align: center;
-	margin: 1% 0 0 45%;
+	margin: 1% 0 0 46%;
 }
 
 #questionBox {
@@ -215,7 +215,7 @@ header {
 
 #fPTitle {
 	
-	margin-left: 25%;
+	margin-left: 11.5%;
 	display: inline;
 	font-size: 3.0em;
 	font:bold;
@@ -227,19 +227,21 @@ header {
   font-size: 1.0em;
   width: 100%;
   height: 30px;
-  display: inline;
-  
+  display: inline;  
 }
 
 .menu ul{
   float: right;
-  margin: 15px 5px 0 0; 
+  margin: 0 1% 0 0;
+  background-color: #000;
+
+  
 }
 
 .menu ul li{
   list-style-type: none;
   display: inline;
-  margin: 0px 20px 0 20px;
+  /*margin: 0 0 0 0;*/
 
 }
 

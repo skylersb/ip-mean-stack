@@ -12,16 +12,21 @@
 	<body ng-controller="mainControl">
 		<header ng-cloak ng-show="isUserLoggedIn">
 	<div id="fPTitle">IncrediP<span><i class="fa fa-question-circle"></i></span>ll</div>
+	
+<!-- <br />
+<br /> -->
+
 <div class="menu" >
 		<ul>
-			<li><a href="/#/polls">Home</a></li>
-			<li><a href="/#/profile">My Profile</a></li>
-			<li><a ng-click="fbLogOut()" ng-show="isUserLoggedIn" href="/logout">Log Out</a></li>
+			<li><a href="/#/polls">Home |</a></li>
+	<!-- 		<li><a href="/#/profile">My Profile</a></li> -->
+			<li><a ng-click="fbLogOut()" ng-show="isUserLoggedIn" href="/logout"> Log Out</a></li>
 			<!-- <li><a ng-show="!isUserLoggedIn" href="/#/login">Log In</a></li> -->
 
 		</ul>
 	</div>
 	</header>
+	
 
 	<div ng-view></div>
 
