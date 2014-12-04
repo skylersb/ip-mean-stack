@@ -71,7 +71,7 @@ body {
 
 
 .addCreateBtns {
-	margin-left: 42.5%;
+	margin-left: 41.75%;
 }
 
 
@@ -189,23 +189,17 @@ header {
 }
 
 .loginBox {
-	/*padding-top: 3%;
-	width: 50%;
-	height: 300px;
-	margin: 10% 25% 0 25%;
-	border-radius: 4%;*/
 	background-color: rgba( 0, 0, 0, 0.8);
-	/*text-align: center;*/
 	width: 50%;
 	margin: 5% 0 0 25%;
-	padding: 5% 5%;
+	padding: 5% 1%;
 	border-radius: 4%;
 
 }
 
 #loginLogo {
 
-	margin-left: 30%;
+	margin-left: 33%;
 	display: inline;
 	font-size: 3.0em;
 	font:bold;
@@ -216,7 +210,7 @@ header {
 .fbBtn {
 
 	display: inline;
-	margin-left: 30%;
+	margin-left: 33%;
 }
 
 #fPTitle {
