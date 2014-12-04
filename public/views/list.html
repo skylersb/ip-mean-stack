@@ -25,7 +25,7 @@
 		</div>
 </div>
 <button id="createAPollBtn" class='btn btn-primary' ng-show="createPollBtn" ng-click="showPollSetup()">Create A Poll</button>
-<div class="row">
+<div id="pollsContainer" class="row">
 	<div class="col-md-6">
 		<div id="panle1" class="panel1">
 			<div class="top-panel1">
@@ -36,11 +36,6 @@
 			<div class="mainPolls"ng-repeat="poll in polls | filter:query">
 				{{poll.question}}
 				<br /> 
-				<!-- {{question.objectId}} -->
-				<!-- <div ng-repeat="option in question.options" > -->
-					<!-- {{question.answer}} -->
-				<!-- </div> -->
-
 				<!-- TAKE POLL BTN -->
 				<button id="takePollBtn" ng-show="!poll.pollTaken" ng-click="takePoll(poll)" class="btn btn-primary">Take Poll</button>
 				<button ng-show="poll.pollTaken" ng-click="viewStats(poll)" class="btn btn-primary">View Stats</button>
@@ -54,7 +49,8 @@
 				<h1 id="completeTitle">Trending Polls</h1>
 			</div>
 			<input id="searchPolls" type="text" class="form-control" ng-model="query2" placeholder="Search for a poll">
-			<div class="mainPolls" ng-repeat="poll in trendingPolls | limitTo: limit | orderBy: allVotes | filter:query2">{{poll.question}}
+			<div class="mainPolls" ng-repeat="poll in trendingPolls | filter:query2">{{poll.question}}
+				<!-- | limitTo: limit | orderBy: allVotes -->
 				<br />
 				<button id="takePollBtn" ng-show="!poll.pollTaken" ng-click="takePoll(poll)" class="btn btn-primary">Take Poll</button>
 				<button ng-show="poll.pollTaken" ng-click="viewStats(poll)" class="btn btn-primary">View Stats</button>

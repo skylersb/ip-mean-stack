@@ -35,6 +35,7 @@ app.directive('createChart', function(pollService) {
 					"maxLabelWidth": 110,
 					"fontSize": 15,
 					"labelTickColor": "#fff",
+					"labelRadius": 31,
 					"titleField": "text",
 					"valueField": "votes",
 					"color": "#fff",
