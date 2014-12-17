@@ -13,7 +13,8 @@ var cors = require('cors');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var LinkedInStrategy = require('passport-linkedin').Strategy;
 var User = require('./server-assets/user/userModel');
 
 var db = 'mongodb://localhost/incredipoll';
@@ -96,20 +97,19 @@ passport.use('twitter', new TwitterStrategy({
 ));
 
 passport.use('google', new GoogleStrategy({
-	  // returnURL: 'http://localhost:3000/auth/google/return' || 'http://www.incredipoll.com/auth/google/return',
-   //  realm: 'http://localhost:3000' || 'http://www.incredipoll.com'
-   returnURL: 'http://incredipoll.com/auth/google/return',
-   realm: 'http://incredipoll.com'
-  }, function(identifier, profile, done) {
+	  clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: '/auth/google/callback'
+  }, function(accessToken, refreshToken, profile, done) {
   	process.nextTick(function(){
-	    User.findOne({googleID: profile.id}, function(err, user) {
+	    User.findOne({googleId: profile.id}, function(err, user) {
 	      if (err) { console.log(err)}
 	      if(!err && user != null){
 	      	done(null, user);
 	      } else {
 	      	var newUser = new User();
 						newUser.userName = profile.displayName;
-				    newUser.googleID = profile.id;
+				    newUser.googleId = profile.id;
 				    newUser.accountCreated = profile.time;
 				    newUser.save(function (err) {
 				    	if(err){
@@ -123,6 +123,36 @@ passport.use('google', new GoogleStrategy({
     });
 	}
 ));
+
+passport.use('linkedin', new LinkedInStrategy({
+	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
+    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
+    callbackURL: '/auth/linkedin/callback'
+  }, function(token, tokenSecret, profile, done) {
+  	process.nextTick(function(){
+	    User.findOne({linkedinId: profile.id}, function(err, user) {
+	      if (err) { console.log(err)}
+	      if(!err && user != null){
+	      	done(null, user);
+	      } else {
+	      	var newUser = new User();
+						newUser.userName = profile._json.name;
+				    newUser.linkedinId = profile.id;
+				    newUser.accountCreated = profile._json.updated_time;
+				    newUser.save(function (err) {
+				    	if(err){
+				    	  console.log(err);
+				    	} else {
+				    		done(null, newUser);
+				    	}
+				    });
+	      	}
+	      });
+    });
+	}
+));
+
+
 
 
 passport.serializeUser(function(user, done) {
@@ -167,12 +197,23 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 }));
 
 //Google Redirect
-app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google', passport.authenticate('google', 
+	{ scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
+}));
 
-app.get('/auth/google/return', passport.authenticate('google', {
+app.get('/auth/google/callback', passport.authenticate('google', {
 	failureRedirect: '/#/login',
 	successRedirect: '/#/polls'
 }));
+
+//LinkedIn Redirect
+app.get('/auth/linkedin', passport.authenticate('linkedin'));
+
+app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+	failureRedirect: '/#/login',
+	successRedirect: '/#/polls'
+}));
+
 
 
 app.get('/me', function (req, res) {

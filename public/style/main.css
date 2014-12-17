@@ -197,9 +197,9 @@ header {
 
 }
 
-#loginLogo {
+#loginContent {
 
-	margin-left: 33%;
+	margin-left: 30%;
 	display: inline;
 	font-size: 3.0em;
 	font:bold;
@@ -207,10 +207,10 @@ header {
 	/*background-color: #000;*/
 }
 
-.fbBtn {
-	margin-top: 1%;
-	display: inline-block;
-	margin-left: 35%;
+.loginSocialBtns {
+	
+	/*display: inline;*/
+	margin: 1% 50% 0 2.75%;
 }
 
 .loginWith {
