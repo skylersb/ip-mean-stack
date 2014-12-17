@@ -13,7 +13,7 @@ var cors = require('cors');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleTokenStrategy = require('passport-google-token');
 // var LinkedInStrategy = require('passport-linkedin').Strategy;
 var User = require('./server-assets/user/userModel');
 
@@ -96,10 +96,10 @@ passport.use('twitter', new TwitterStrategy({
 	}
 ));
 
-passport.use('google', new GoogleStrategy({
+passport.use('google-token', new GoogleTokenStrategy({
 	  clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    // callbackURL: '/auth/google/callback'
   }, function(accessToken, refreshToken, profile, done) {
   	process.nextTick(function(){
 	    User.findOne({googleId: profile.id}, function(err, user) {
@@ -197,11 +197,11 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 }));
 
 //Google Redirect
-app.get('/auth/google', passport.authenticate('google', 
-	{ scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
-}));
+app.get('/auth/google', passport.authenticate('google-token'
+	// , { scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']}
+));
 
-app.get('/auth/google/callback', passport.authenticate('google', {
+app.get('/auth/google/token', passport.authenticate('google-token', {
 	failureRedirect: '/#/login',
 	successRedirect: '/#/polls'
 }));
