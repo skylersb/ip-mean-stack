@@ -14,7 +14,7 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 // var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// var LinkedInStrategy = require('passport-linkedin').Strategy;
+var LinkedInStrategy = require('passport-linkedin').Strategy;
 var User = require('./server-assets/user/userModel');
 
 var db = 'mongodb://localhost/incredipoll';
@@ -124,33 +124,33 @@ passport.use('twitter', new TwitterStrategy({
 // 	}
 // ));
 
-// passport.use('linkedin', new LinkedInStrategy({
-// 	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
-//     consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
-//     callbackURL: '/auth/linkedin/callback'
-//   }, function(token, tokenSecret, profile, done) {
-//   	process.nextTick(function(){
-// 	    User.findOne({linkedinId: profile.id}, function(err, user) {
-// 	      if (err) { console.log(err)}
-// 	      if(!err && user != null){
-// 	      	done(null, user);
-// 	      } else {
-// 	      	var newUser = new User();
-// 						newUser.userName = profile._json.name;
-// 				    newUser.linkedinId = profile.id;
-// 				    newUser.accountCreated = profile._json.updated_time;
-// 				    newUser.save(function (err) {
-// 				    	if(err){
-// 				    	  console.log(err);
-// 				    	} else {
-// 				    		done(null, newUser);
-// 				    	}
-// 				    });
-// 	      	}
-// 	      });
-//     });
-// 	}
-// ));
+passport.use('linkedin', new LinkedInStrategy({
+	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
+    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
+    callbackURL: '/auth/linkedin/callback'
+  }, function(token, tokenSecret, profile, done) {
+  	process.nextTick(function(){
+	    User.findOne({linkedinId: profile.id}, function(err, user) {
+	      if (err) { console.log(err)}
+	      if(!err && user != null){
+	      	done(null, user);
+	      } else {
+	      	var newUser = new User();
+						newUser.userName = profile._json.name;
+				    newUser.linkedinId = profile.id;
+				    newUser.accountCreated = profile._json.updated_time;
+				    newUser.save(function (err) {
+				    	if(err){
+				    	  console.log(err);
+				    	} else {
+				    		done(null, newUser);
+				    	}
+				    });
+	      	}
+	      });
+    });
+	}
+));
 
 
 
@@ -206,13 +206,13 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 // 	successRedirect: '/#/polls'
 // }));
 
-// //LinkedIn Redirect
-// app.get('/auth/linkedin', passport.authenticate('linkedin'));
+//LinkedIn Redirect
+app.get('/auth/linkedin', passport.authenticate('linkedin'));
 
-// app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-// 	failureRedirect: '/#/login',
-// 	successRedirect: '/#/polls'
-// }));
+app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+	failureRedirect: '/#/login',
+	successRedirect: '/#/polls'
+}));
 
 
 
