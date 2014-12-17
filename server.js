@@ -13,7 +13,7 @@ var cors = require('cors');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 // var LinkedInStrategy = require('passport-linkedin').Strategy;
 var User = require('./server-assets/user/userModel');
 
@@ -96,33 +96,33 @@ passport.use('twitter', new TwitterStrategy({
 	}
 ));
 
-passport.use('google', new GoogleStrategy({
-	  clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback'
-  }, function(accessToken, refreshToken, profile, done) {
-  	process.nextTick(function(){
-	    User.findOne({googleId: profile.id}, function(err, user) {
-	      if (err) { console.log(err)}
-	      if(!err && user != null){
-	      	done(null, user);
-	      } else {
-	      	var newUser = new User();
-						newUser.userName = profile.displayName;
-				    newUser.googleId = profile.id;
-				    newUser.accountCreated = profile.time;
-				    newUser.save(function (err) {
-				    	if(err){
-				    	  console.log(err);
-				    	} else {
-				    		done(null, newUser);
-				    	}
-				    });
-	      	}
-	      });
-    });
-	}
-));
+// passport.use('google', new GoogleStrategy({
+// 	  clientID: process.env.GOOGLE_CLIENT_ID,
+//     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL: '/auth/google/callback'
+//   }, function(accessToken, refreshToken, profile, done) {
+//   	process.nextTick(function(){
+// 	    User.findOne({googleId: profile.id}, function(err, user) {
+// 	      if (err) { console.log(err)}
+// 	      if(!err && user != null){
+// 	      	done(null, user);
+// 	      } else {
+// 	      	var newUser = new User();
+// 						newUser.userName = profile.displayName;
+// 				    newUser.googleId = profile.id;
+// 				    newUser.accountCreated = profile.time;
+// 				    newUser.save(function (err) {
+// 				    	if(err){
+// 				    	  console.log(err);
+// 				    	} else {
+// 				    		done(null, newUser);
+// 				    	}
+// 				    });
+// 	      	}
+// 	      });
+//     });
+// 	}
+// ));
 
 // passport.use('linkedin', new LinkedInStrategy({
 // 	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
@@ -196,15 +196,15 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter', {
 	successRedirect: '/#/polls'
 }));
 
-//Google Redirect
-app.get('/auth/google', passport.authenticate('google', 
-	{ scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
-}));
+// //Google Redirect
+// app.get('/auth/google', passport.authenticate('google', 
+// 	{ scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email']
+// }));
 
-app.get('/auth/google/callback', passport.authenticate('google', {
-	failureRedirect: '/#/login',
-	successRedirect: '/#/polls'
-}));
+// app.get('/auth/google/callback', passport.authenticate('google', {
+// 	failureRedirect: '/#/login',
+// 	successRedirect: '/#/polls'
+// }));
 
 // //LinkedIn Redirect
 // app.get('/auth/linkedin', passport.authenticate('linkedin'));
