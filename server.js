@@ -125,8 +125,8 @@ passport.use('google', new GoogleStrategy({
 ));
 
 passport.use('linkedin', new LinkedInStrategy({
-	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
-    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
+	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY || '75nliyrnqlnjw4',
+    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET || 'NbU9IGA4wOn4clDY',
     callbackURL: '/auth/linkedin/callback'
   }, function(token, tokenSecret, profile, done) {
   	process.nextTick(function(){
