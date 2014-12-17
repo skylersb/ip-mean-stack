@@ -41,8 +41,8 @@ app.use(express.static(__dirname + '/public'));
 
 var user = {};
 passport.use('facebook', new FacebookStrategy({
- clientID: process.env.FACEBOOK_APP_ID || '380054328825864',
- clientSecret: process.env.FACEBOOK_SECRET_ID || '348682659a6741a449c30aa77ee8a3aa',
+ clientID: process.env.FACEBOOK_APP_ID,
+ clientSecret: process.env.FACEBOOK_SECRET_ID,
  callbackURL: '/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function(){
@@ -69,8 +69,8 @@ passport.use('facebook', new FacebookStrategy({
 ));
 
 passport.use('twitter', new TwitterStrategy({
-	  consumerKey: process.env.TWITTER_CONSUMER_KEY || 'ayWV5ayZ8uQpjGGmFYv7mektJ',
-    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || '7h7Iy3k83XF9QKx3urIiQrqHg48zgIpgjIIHkcRKQJ0vJt78Gb',
+	  consumerKey: process.env.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
     callbackURL: '/auth/twitter/callback'
   }, function(token, tokenSecret, profile, done) {
   	process.nextTick(function(){
@@ -97,8 +97,8 @@ passport.use('twitter', new TwitterStrategy({
 ));
 
 passport.use('google', new GoogleStrategy({
-	  clientID: process.env.GOOGLE_CLIENT_ID || '678792511059-96h105n1i1dqp35a1oaace5qvbg94jpe.apps.googleusercontent.com',
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'gYqg_xHM2VfnPO6ReDQvS8yQ',
+	  clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback'
   }, function(accessToken, refreshToken, profile, done) {
   	process.nextTick(function(){
@@ -125,8 +125,8 @@ passport.use('google', new GoogleStrategy({
 ));
 
 passport.use('linkedin', new LinkedInStrategy({
-	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY || '75nliyrnqlnjw4',
-    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET || 'NbU9IGA4wOn4clDY',
+	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
+    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
     callbackURL: '/auth/linkedin/callback'
   }, function(token, tokenSecret, profile, done) {
   	process.nextTick(function(){
