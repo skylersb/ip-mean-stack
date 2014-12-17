@@ -1,8 +1,11 @@
 
 html {
 	background-position: 0 0 10% 0;
-	background: url("http://hecticparents.files.wordpress.com/2013/08/character-raising-hand-in-a-crowd.jpg") no-repeat fixed;
-	-website-background-size: cover;
+	background: url("/images/incredipoll-background.jpg") no-repeat fixed;
+
+/*	background: url("http://hecticparents.files.wordpress.com/2013/08/character-raising-hand-in-a-crowd.jpg") no-repeat fixed;
+
+*/	-website-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
