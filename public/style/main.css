@@ -190,9 +190,9 @@ header {
 
 .loginBox {
 	background-color: rgba( 0, 0, 0, 0.8);
-	width: 50%;
-	margin: 5% 0 0 25%;
-	padding: 5% 1%;
+	width: 40%;
+	margin: 5% 0 0 30%;
+	padding: 4% 0 4% 0;
 	border-radius: 4%;
 
 }
@@ -208,10 +208,24 @@ header {
 }
 
 .fbBtn {
-
-	display: inline;
-	margin-left: 33%;
+	margin-top: 1%;
+	display: inline-block;
+	margin-left: 35%;
 }
+
+.loginWith {
+	margin: 10% 0 0 40%;
+}
+
+/*.twitterBtn {
+	display: inline-block;
+	margin-left: 33%;
+}*/
+
+/*.googleBtn {
+	display: inline-block;
+	margin-left: 33%;
+}*/
 
 #fPTitle {
 	
