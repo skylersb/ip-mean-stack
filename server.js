@@ -97,8 +97,8 @@ passport.use('twitter', new TwitterStrategy({
 ));
 
 passport.use('google', new GoogleStrategy({
-	  clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+	  clientID: process.env.GOOGLE_CLIENT_ID || '678792511059-96h105n1i1dqp35a1oaace5qvbg94jpe.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'gYqg_xHM2VfnPO6ReDQvS8yQ',
     callbackURL: '/auth/google/callback'
   }, function(accessToken, refreshToken, profile, done) {
   	process.nextTick(function(){
@@ -125,8 +125,8 @@ passport.use('google', new GoogleStrategy({
 ));
 
 passport.use('linkedin', new LinkedInStrategy({
-	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY || '75nliyrnqlnjw4',
-    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET || 'NbU9IGA4wOn4clDY',
+	  consumerKey: process.env.LINKEDIN_CONSUMER_KEY,
+    consumerSecret: process.env.LINKEDIN_CONSUMER_SECRET,
     callbackURL: '/auth/linkedin/callback'
   }, function(token, tokenSecret, profile, done) {
   	process.nextTick(function(){
