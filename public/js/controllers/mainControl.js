@@ -100,6 +100,7 @@ $scope.showPollSetup = function(){
 		$scope.poll = {
 			question: '',
 			pollOptions: [{text: ''}, {text: ''}]
+			category: []
 		};
 		socket.emit('pollCreated')
 	}

@@ -3,9 +3,9 @@ html {
 	background-position: 0 0 10% 0;
 	background: url("/images/incredipoll-background.jpg") no-repeat fixed;
 
-/*	background: url("http://hecticparents.files.wordpress.com/2013/08/character-raising-hand-in-a-crowd.jpg") no-repeat fixed;
+	/*background: url("http://hecticparents.files.wordpress.com/2013/08/character-raising-hand-in-a-crowd.jpg") no-repeat fixed;*/
 
-*/	-website-background-size: cover;
+	-website-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
@@ -171,7 +171,7 @@ h1 {
 	width: 100%;
 	padding: 5px 0px;
 	text-align: center;
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(0, 0, 0, 0.6);
 	color: #000;
 	margin: 10px 0px;
 	border-radius: 5px;
@@ -188,7 +188,7 @@ header {
 	padding: 15px 0;
 	text-align: center;
 	color: #fff;
-	background-color: #000;
+	background-color: rgba( 0, 0, 0, 0.9);
 }
 
 .loginBox {
@@ -250,9 +250,6 @@ header {
 .menu ul{
   float: right;
   margin: 0 1% 0 0;
-  background-color: #000;
-
-  
 }
 
 .menu ul li{

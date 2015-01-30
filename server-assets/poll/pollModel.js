@@ -14,8 +14,8 @@ var optionSchema = new Schema({
 var Poll = new Schema({
 	question: {type: String, required: true},
 	pollOptions: [optionSchema],
-	allVotes: {type: Number, default: 0}
-	// category: {type: String, required: true}
+	allVotes: {type: Number, default: 0},
+	category: {type: String, enum: ['Politics', 'Sports', 'Entertainment', 'Technology', 'Education', 'Music', 'World'], required: false}
 });
 
 module.exports = mongoose.model('Poll', Poll);

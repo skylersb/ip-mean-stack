@@ -41,8 +41,8 @@ app.use(express.static(__dirname + '/public'));
 
 var user = {};
 passport.use('facebook', new FacebookStrategy({
- clientID: process.env.FACEBOOK_APP_ID,
- clientSecret: process.env.FACEBOOK_SECRET_ID,
+ clientID: process.env.FACEBOOK_APP_ID || '380054328825864',
+ clientSecret: process.env.FACEBOOK_SECRET_ID || '348682659a6741a449c30aa77ee8a3aa',
  callbackURL: '/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function(){
@@ -69,8 +69,8 @@ passport.use('facebook', new FacebookStrategy({
 ));
 
 passport.use('twitter', new TwitterStrategy({
-	  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-    consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+	  consumerKey: process.env.TWITTER_CONSUMER_KEY || 'ayWV5ayZ8uQpjGGmFYv7mektJ',
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || '7h7Iy3k83XF9QKx3urIiQrqHg48zgIpgjIIHkcRKQJ0vJt78Gb',
     callbackURL: '/auth/twitter/callback'
   }, function(token, tokenSecret, profile, done) {
   	process.nextTick(function(){
