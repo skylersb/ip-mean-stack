@@ -99,7 +99,7 @@ $scope.showPollSetup = function(){
 		pollService.addPoll($scope.poll)
 		$scope.poll = {
 			question: '',
-			pollOptions: [{text: ''}, {text: ''}]
+			pollOptions: [{text: ''}, {text: ''}],
 			category: []
 		};
 		socket.emit('pollCreated')
